@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko-KR" class="" style="--primary-color: #4d0f76; --secondary-color: #7e73d4; --tertiary-color: #f8f1e8;"><head>
+
+<style id="landy-theme-vars">
+  :root {
+    --primary-color: #78350F;
+    --secondary-color: #D4A574;
+    --tertiary-color: #F8F1E9;
+  }
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>랜딩페이지, AI가 자동으로 만들고 배포까지 | Landy</title>
+<meta name="description" content="몇 가지 정보만 입력하면 AI가 랜딩페이지를 자동 제작하고 배포까지 해드립니다. 비싼 외주 없이 지금 바로 시작하세요.">
+<meta name="keywords" content="랜딩페이지 자동 제작, AI 랜딩페이지, 랜딩페이지 배포, 랜딩페이지 무료 제작">
+<meta property="og:title" content="랜딩페이지, AI가 자동으로 만들고 배포까지">
+<meta property="og:description" content="몇 가지 정보만 입력하면 AI가 랜딩페이지를 자동 제작하고 배포까지 해드립니다.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary-color: var(--primary-color);
+    --secondary-color: var(--secondary-color);
+    --tertiary-color: var(--tertiary-color);
+  }
+  * { font-family: 'Noto Sans KR', sans-serif; }
+  html { scroll-behavior: smooth; }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #1a0a00 0%, #2d1200 40%, #3d1a00 70%, #1a0a00 100%);
+  }
+  .grain-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .badge-pill {
+    background: linear-gradient(135deg, rgba(212,165,116,0.15), rgba(212,165,116,0.05));
+    border: 1px solid rgba(212,165,116,0.3);
+  }
+  .cta-button {
+    background: linear-gradient(135deg, var(--secondary-color), #B8834A);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(212,165,116,0.35);
+  }
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(212,165,116,0.5);
+  }
+  .feature-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,165,116,0.12);
+    transition: all 0.3s ease;
+  }
+  .feature-card:hover {
+    background: rgba(212,165,116,0.06);
+    border-color: rgba(212,165,116,0.25);
+    transform: translateY(-4px);
+  }
+  .section-divider {
+    background: linear-gradient(90deg, transparent, rgba(212,165,116,0.4), transparent);
+    height: 1px;
+    width: 100%;
+  }
+  .step-line {
+    background: linear-gradient(180deg, var(--secondary-color), transparent);
+  }
+  .form-card {
+    background: linear-gradient(145deg, #ffffff, #fdf6ee);
+    border: 1px solid rgba(212,165,116,0.25);
+  }
+  .form-input {
+    border: 1.5px solid #e8d9c8;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(212,165,116,0.12);
+  }
+  .portfolio-img {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .portfolio-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+  }
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-overlay.active {
+    display: flex;
+  }
+  .faq-item {
+    border-bottom: 1px solid rgba(212,165,116,0.15);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .faq-answer.open {
+    max-height: 300px;
+  }
+  .pain-card {
+    background: linear-gradient(135deg, rgba(120,53,15,0.08), rgba(212,165,116,0.05));
+    border: 1px solid rgba(120,53,15,0.12);
+  }
+  .number-highlight {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeInUp {
+    animation: fadeInUp 0.7s ease forwards;
+  }
+  .delay-1 { animation-delay: 0.15s; opacity: 0; }
+  .delay-2 { animation-delay: 0.3s; opacity: 0; }
+  .delay-3 { animation-delay: 0.45s; opacity: 0; }
+  .dark-section {
+    background: linear-gradient(180deg, #0f0500 0%, #1a0a00 100%);
+  }
+  .tag-chip {
+    background: rgba(212,165,116,0.1);
+    border: 1px solid rgba(212,165,116,0.2);
+    color: var(--secondary-color);
+  }
+</style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.bottom-4{bottom:1rem}.bottom-\[10\%\]{bottom:10%}.left-\[-60px\]{left:-60px}.right-4{right:1rem}.right-6{right:1.5rem}.right-\[-40px\]{right:-40px}.right-\[-80px\]{right:-80px}.top-6{top:1.5rem}.top-\[-40px\]{top:-40px}.top-\[-80px\]{top:-80px}.z-10{z-index:10}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-10{margin-bottom:2.5rem}.mb-14{margin-bottom:3.5rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:0.25rem}.mt-1{margin-top:0.25rem}.mt-10{margin-top:2.5rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-12{height:3rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-5{height:1.25rem}.h-56{height:14rem}.h-72{height:18rem}.h-8{height:2rem}.h-80{height:20rem}.h-9{height:2.25rem}.h-96{height:24rem}.max-h-\[88vh\]{max-height:88vh}.min-h-screen{min-height:100vh}.w-0\.5{width:0.125rem}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-2{width:0.5rem}.w-5{width:1.25rem}.w-72{width:18rem}.w-80{width:20rem}.w-96{width:24rem}.w-auto{width:auto}.w-full{width:100%}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.max-w-\[92vw\]{max-width:92vw}.max-w-lg{max-width:32rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;user-select:none}.resize-none{resize:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-0{gap:0px}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.space-y-0 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0px * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0px * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-opacity-10{--tw-border-opacity:0.1}.bg-\[\#0f0500\]{--tw-bg-opacity:1;background-color:rgb(15 5 0 / var(--tw-bg-opacity, 1))}.bg-\[var\(--primary-color\)\]{background-color:var(--primary-color)}.bg-\[var\(--secondary-color\)\]{background-color:var(--secondary-color)}.bg-\[var\(--tertiary-color\)\]{background-color:var(--tertiary-color)}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-opacity-10{--tw-bg-opacity:0.1}.bg-opacity-15{--tw-bg-opacity:0.15}.bg-opacity-30{--tw-bg-opacity:0.3}.object-contain{object-fit:contain}.object-cover{object-fit:cover}.object-top{object-position:top}.p-7{padding:1.75rem}.p-8{padding:2rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-10{padding-bottom:2.5rem}.pb-8{padding-bottom:2rem}.pt-1{padding-top:0.25rem}.pt-3{padding-top:0.75rem}.text-center{text-align:center}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.text-\[var\(--primary-color\)\]{color:var(--primary-color)}.text-\[var\(--secondary-color\)\]{color:var(--secondary-color)}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.underline-offset-4{text-underline-offset:4px}.opacity-10{opacity:0.1}.opacity-20{opacity:0.2}.opacity-40{opacity:0.4}.opacity-70{opacity:0.7}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:bg-opacity-20:hover{--tw-bg-opacity:0.2}.hover\:text-\[var\(--secondary-color\)\]:hover{color:var(--secondary-color)}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}@media (min-width: 640px){.sm\:col-span-2{grid-column:span 2 / span 2}.sm\:w-auto{width:auto}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:block{display:block}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:px-12{padding-left:3rem;padding-right:3rem}.md\:px-16{padding-left:4rem;padding-right:4rem}.md\:py-24{padding-top:6rem;padding-bottom:6rem}.md\:py-28{padding-top:7rem;padding-bottom:7rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-lg{font-size:1.125rem;line-height:1.75rem}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 1024px){.lg\:col-span-1{grid-column:span 1 / span 1}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:text-7xl{font-size:4.5rem;line-height:1}}</style></head>
+<body class="bg-[var(--tertiary-color)] text-gray-800">
+
+<!-- ===== HERO ===== -->
+<section class="hero-gradient relative overflow-hidden min-h-screen flex flex-col">
+  <div class="grain-overlay"></div>
+  <!-- Decorative orbs -->
+  <div class="glow-orb w-96 h-96 bg-[var(--secondary-color)] opacity-10 top-[-80px] right-[-80px]"></div>
+  <div class="glow-orb w-72 h-72 bg-[var(--primary-color)] opacity-20 bottom-[10%] left-[-60px]"></div>
+
+  <!-- Nav -->
+  <nav class="relative z-10 flex items-center justify-between px-6 md:px-16 py-6">
+    <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578555918-a04typ1.png" alt="Landy 로고" class="h-9 w-auto">
+    <a href="#form-section" class="cta-button text-white text-sm font-semibold px-5 py-2.5 rounded-full">
+      테스터 신청 →
+    </a>
+  </nav>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6 md:px-12 py-16 md:py-24">
+    <div class="badge-pill inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 animate-fadeInUp">
+      <span class="w-2 h-2 rounded-full bg-[var(--secondary-color)] inline-block animate-pulse"></span>
+      <span class="text-[var(--secondary-color)] text-sm font-medium tracking-wide">얼리 테스터 모집 중</span>
+    </div>
+
+    <h1 class="text-white text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight max-w-4xl animate-fadeInUp delay-1">
+      랜딩페이지,<br>
+      <span class="number-highlight">AI가 자동으로</span><br>
+      만들고 배포까지
+    </h1>
+
+    <p class="mt-6 text-gray-300 text-lg md:text-xl max-w-xl leading-relaxed animate-fadeInUp delay-2">
+      몇 가지 정보만 입력하면<br class="hidden md:block">
+      전문가 수준의 랜딩페이지가 완성됩니다.<br>
+      <span class="text-[var(--secondary-color)] font-semibold">외주비 0원</span>으로요.
+    </p>
+
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 items-center animate-fadeInUp delay-3">
+      <a href="#form-section" class="cta-button text-white font-bold text-base px-8 py-4 rounded-2xl w-full sm:w-auto text-center">
+        지금 무료로 테스터 신청하기
+      </a>
+      <a href="#portfolio-section" class="text-gray-300 text-sm font-medium underline underline-offset-4 hover:text-[var(--secondary-color)] transition-colors">
+        제작 결과물 보기
+      </a>
+    </div>
+
+    <p class="mt-4 text-gray-500 text-xs">작성 시간 1분 · 비용 없음 · 지금 바로 신청 가능</p>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="relative z-10 flex justify-center pb-8">
+    <div class="flex flex-col items-center gap-1 opacity-40">
+      <span class="text-gray-400 text-xs">스크롤</span>
+      <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 0v16M2 10l6 6 6-6" stroke="var(--secondary-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAIN POINT ===== -->
+<section class="bg-[var(--tertiary-color)] py-20 md:py-28 px-6 md:px-12">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="tag-chip text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">혹시 이런 고민 있으신가요?</span>
+      <h2 class="mt-5 text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug">
+        랜딩페이지 하나 때문에<br>
+        <span class="text-[var(--primary-color)]" style="font-size: 28px;">수십만 원을 써야 하나요?</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="pain-card rounded-2xl p-7">
+        <div class="w-11 h-11 bg-[var(--primary-color)] bg-opacity-10 rounded-xl flex items-center justify-center mb-5">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="" style="color: rgb(20, 118, 255); -webkit-text-fill-color: rgb(20, 118, 255); background-color: rgb(194, 0, 0);">
+            <circle cx="12" cy="12" r="10" class=""></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16" class=""></line>
+          </svg>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg mb-2">외주 비용이 너무 비싸요</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">랜딩페이지 하나에 50~200만 원? 작은 프로젝트엔 부담이 너무 큽니다.</p>
+      </div>
+
+      <div class="pain-card rounded-2xl p-7">
+        <div class="w-11 h-11 bg-[var(--primary-color)] bg-opacity-10 rounded-xl flex items-center justify-center mb-5">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg mb-2">시간이 너무 오래 걸려요</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">기획→디자인→개발→배포까지 최소 2주. 급할 때 쓸 수가 없어요.</p>
+      </div>
+
+      <div class="pain-card rounded-2xl p-7">
+        <div class="w-11 h-11 bg-[var(--primary-color)] bg-opacity-10 rounded-xl flex items-center justify-center mb-5">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" class=""></path>
+          </svg>
+        </div>
+        <h3 class="font-bold text-gray-900 text-lg mb-2">직접 만들기엔 너무 어려워요</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">코딩도 모르고 디자인도 자신 없는데, 그렇다고 포기할 수도 없죠.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider max-w-5xl mx-auto"></div>
+
+<!-- ===== SOLUTION & FEATURES ===== -->
+<section class="bg-[var(--tertiary-color)] py-20 md:py-28 px-6 md:px-12">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="tag-chip text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">해결책</span>
+      <h2 class="mt-5 text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug" style="font-size: 21px;">
+        정보 입력 → AI 제작 → 즉시 배포<br>
+        <span class="text-[var(--primary-color)]" style="font-size: 31px;">이 세 단계가 전부입니다</span>
+      </h2>
+      <p class="mt-4 text-gray-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed" style="font-size: 15px;">
+        복잡한 과정 없이, 내 비즈니스 정보만 입력하면<br>전문가가 만든 것 같은 랜딩페이지가 완성됩니다.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Feature 1 -->
+      <div class="feature-card rounded-2xl p-8 dark-section">
+        <div class="w-12 h-12 rounded-xl bg-[var(--secondary-color)] bg-opacity-15 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="" style="color: rgb(0, 106, 255); -webkit-text-fill-color: rgb(0, 106, 255); background-color: rgb(53, 19, 19);">
+            <rect x="3" y="3" width="18" height="18" rx="2" class="" style="background-color: rgb(250, 0, 0); color: rgb(0, 106, 255); -webkit-text-fill-color: rgb(0, 106, 255);"></rect><path d="M9 9h6M9 12h6M9 15h4" class=""></path>
+          </svg>
+        </div>
+        <h3 class="text-white font-bold text-xl mb-3">랜딩페이지 자동 제작</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">몇 가지 정보를 입력하면 AI가 랜딩페이지를 자동으로 제작해 줘요. 기획부터 디자인까지 단 몇 분 만에 완성됩니다.</p>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card rounded-2xl p-8 dark-section">
+        <div class="w-12 h-12 rounded-xl bg-[var(--secondary-color)] bg-opacity-15 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+        </div>
+        <h3 class="text-white font-bold text-xl mb-3">빌더를 통한 수정</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">AI가 만든 걸로 끝나는 게 아닌, 내 손으로 내용 및 디자인을 수정해요. 원하는 대로 자유롭게 커스터마이징 가능합니다.</p>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card rounded-2xl p-8 dark-section">
+        <div class="w-12 h-12 rounded-xl bg-[var(--secondary-color)] bg-opacity-15 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="" style="background-color: rgb(200, 20, 20);">
+            <polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" class=""></path>
+          </svg>
+        </div>
+        <h3 class="text-white font-bold text-xl mb-3">자동 배포 및 URL 전달</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">평생 무료 서버에 자동으로 배포하고 제작한 랜딩페이지의 URL을 전달해요. 서버 관리 걱정은 제로.</p>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card rounded-2xl p-8 dark-section">
+        <div class="w-12 h-12 rounded-xl bg-[var(--secondary-color)] bg-opacity-15 flex items-center justify-center mb-6">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <h3 class="text-white font-bold text-xl mb-3">SEO 검색엔진 최적화 가이드</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">가이드를 따라하면 검색 사이트에 내 페이지가 노출돼요. 네이버, 구글 등 주요 검색엔진 최적화를 도와드립니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="bg-white py-20 md:py-28 px-6 md:px-12">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="tag-chip text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">이용 과정</span>
+      <h2 class="mt-5 text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug">
+        3단계로 끝나는<br>
+        <span class="text-[var(--primary-color)]">초간단 프로세스</span>
+      </h2>
+    </div>
+
+    <div class="relative">
+      <!-- Steps -->
+      <div class="flex flex-col gap-0">
+        <!-- Step 1 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 rounded-full bg-[var(--primary-color)] flex items-center justify-center text-white font-bold text-lg flex-shrink-0 shadow-lg">1</div>
+            <div class="step-line w-0.5 h-16 mt-1"></div>
+          </div>
+          <div class="pb-10 pt-1">
+            <h3 class="font-bold text-gray-900 text-xl mb-2">비즈니스 정보 입력</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">서비스 이름, 특징, 타겟 고객 등 간단한 정보를 입력합니다. 1분이면 충분해요.</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 rounded-full bg-[var(--secondary-color)] flex items-center justify-center text-white font-bold text-lg flex-shrink-0 shadow-lg">2</div>
+            <div class="step-line w-0.5 h-16 mt-1"></div>
+          </div>
+          <div class="pb-10 pt-1">
+            <h3 class="font-bold text-gray-900 text-xl mb-2">AI 자동 제작 + 빌더 수정</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">AI가 전문가 수준의 랜딩페이지를 자동 생성하고, 빌더로 원하는 대로 수정합니다.</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex gap-6 items-start">
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 rounded-full bg-[var(--primary-color)] flex items-center justify-center text-white font-bold text-lg flex-shrink-0 shadow-lg">3</div>
+          </div>
+          <div class="pt-1">
+            <h3 class="font-bold text-gray-900 text-xl mb-2">즉시 배포 &amp; URL 공유</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">클릭 한 번으로 무료 서버에 배포 완료. 나만의 랜딩페이지 URL을 바로 공유하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTFOLIO ===== -->
+<section id="portfolio-section" class="bg-[var(--tertiary-color)] py-20 md:py-28 px-6 md:px-12">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="tag-chip text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">제작 결과물</span>
+      <h2 class="mt-5 text-3xl md:text-4xl font-extrabold text-gray-900 leading-snug">
+        이미 이런 랜딩페이지들이<br>
+        <span class="text-[var(--primary-color)]">AI로 만들어졌습니다</span>
+      </h2>
+      <p class="mt-4 text-gray-500 text-base max-w-lg mx-auto">실제 AI가 자동 제작한 결과물입니다. 이미지를 클릭해 자세히 확인하세요.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="rounded-2xl overflow-hidden shadow-md bg-white">
+        <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578510942-sxm2jt9.png" alt="랜딩페이지 제작 결과물 1" class="portfolio-img w-full h-56 object-cover object-top" onclick="openLightbox('https://mufydxjttzxhgabagahp.supabase.co/storage/v1/object/public/campaign-assets/b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578510942-sxm2jt9.png')">
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-md bg-white">
+        <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578510929-l7uhrhm.png" alt="랜딩페이지 제작 결과물 2" class="portfolio-img w-full h-56 object-cover object-top" onclick="openLightbox('https://mufydxjttzxhgabagahp.supabase.co/storage/v1/object/public/campaign-assets/b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578510929-l7uhrhm.png')">
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-md bg-white">
+        <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578524358-bb3wagh.png" alt="랜딩페이지 결과 화면 5" class="portfolio-img w-full h-56 object-cover object-top" onclick="openLightbox('https://mufydxjttzxhgabagahp.supabase.co/storage/v1/object/public/campaign-assets/b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578524358-bb3wagh.png')">
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-md bg-white">
+        <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773579197507-bhd3yv8.png" alt="랜딩페이지 결과 화면 4" class="portfolio-img w-full h-56 object-cover object-top" onclick="openLightbox('https://mufydxjttzxhgabagahp.supabase.co/storage/v1/object/public/campaign-assets/b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578536549-baemb5m.png')">
+      </div><div class="rounded-2xl overflow-hidden shadow-md bg-white">
+        <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578536549-baemb5m.png" alt="랜딩페이지 결과 화면 4" class="portfolio-img w-full h-56 object-cover object-top" onclick="openLightbox('https://mufydxjttzxhgabagahp.supabase.co/storage/v1/object/public/campaign-assets/b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578536549-baemb5m.png')">
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-md bg-white sm:col-span-2 lg:col-span-1">
+        <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578542799-odrge7x.png" alt="랜딩페이지 결과 화면" class="portfolio-img w-full h-56 object-cover object-top" onclick="openLightbox('https://mufydxjttzxhgabagahp.supabase.co/storage/v1/object/public/campaign-assets/b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578542799-odrge7x.png')">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay hidden" id="lightbox" onclick="closeLightbox()" style="display: none;">
+  <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white w-10 h-10 flex items-center justify-center rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition-colors z-10">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="확대된 포트폴리오 이미지" class="max-w-[92vw] max-h-[88vh] object-contain rounded-xl shadow-2xl" onclick="event.stopPropagation()">
+</div>
+
+<!-- ===== FAQ ===== -->
+<section class="bg-white py-20 md:py-28 px-6 md:px-12">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="tag-chip text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">자주 묻는 질문</span>
+      <h2 class="mt-5 text-3xl md:text-4xl font-extrabold text-gray-900">
+        궁금한 점, <span class="text-[var(--primary-color)]">미리 답해드립니다</span>
+      </h2>
+    </div>
+
+    <div class="space-y-0">
+      <!-- FAQ 1 -->
+      <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="font-semibold text-gray-900 text-base leading-snug">코딩을 전혀 몰라도 사용할 수 있나요?</h3>
+          <svg class="faq-icon flex-shrink-0 w-5 h-5 text-[var(--secondary-color)] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9" class=""></polyline></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="pt-3 text-gray-500 text-sm leading-relaxed">네, 전혀 몰라도 됩니다. 텍스트를 입력하고 버튼을 클릭하는 것만으로 전문가 수준의 랜딩페이지를 완성할 수 있습니다.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="font-semibold text-gray-900 text-base leading-snug">배포 후 비용이 발생하나요?</h3>
+          <svg class="faq-icon flex-shrink-0 w-5 h-5 text-[var(--secondary-color)] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="pt-3 text-gray-500 text-sm leading-relaxed">테스터 기간 동안에는 서버 비용이 발생하지 않습니다. 평생 무료 서버에 자동 배포하여 안정적으로 운영됩니다.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="font-semibold text-gray-900 text-base leading-snug">AI가 만든 결과물을 직접 수정할 수 있나요?</h3>
+          <svg class="faq-icon flex-shrink-0 w-5 h-5 text-[var(--secondary-color)] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="pt-3 text-gray-500 text-sm leading-relaxed">물론입니다. 내장된 빌더를 통해 텍스트, 이미지, 색상, 레이아웃 등을 자유롭게 수정할 수 있습니다. AI 결과물은 시작점일 뿐입니다.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="font-semibold text-gray-900 text-base leading-snug">이 서비스가 맞지 않는 경우도 있나요?</h3>
+          <svg class="faq-icon flex-shrink-0 w-5 h-5 text-[var(--secondary-color)] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9" class=""></polyline></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="pt-3 text-gray-500 text-sm leading-relaxed">복잡한 기능(결제, 회원가입, 대형 쇼핑몰 등)이 필요한 경우는 적합하지 않을 수 있습니다. 단순하고 임팩트 있는 랜딩페이지가 필요한 분들께 최적화되어 있습니다.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="faq-item py-5 cursor-pointer" onclick="toggleFaq(this)">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="font-semibold text-gray-900 text-base leading-snug">테스터로 신청하면 어떤 혜택이 있나요?</h3>
+          <svg class="faq-icon flex-shrink-0 w-5 h-5 text-[var(--secondary-color)] transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="faq-answer">
+          <p class="pt-3 text-gray-500 text-sm leading-relaxed">서비스를 무료로 먼저 체험할 수 있으며, 정식 출시 후 특별 혜택이 제공됩니다. 여러분의 피드백이 서비스를 더 좋게 만드는 데 직접 반영됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA FORM ===== -->
+<section id="form-section" class="dark-section py-20 md:py-28 px-6 md:px-12 relative overflow-hidden">
+  <div class="glow-orb w-80 h-80 bg-[var(--secondary-color)] opacity-8 top-[-40px] right-[-40px]"></div>
+  <div class="max-w-xl mx-auto relative z-10">
+    <div class="text-center mb-10">
+      <span class="tag-chip text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">테스터 모집</span>
+      <h2 class="mt-5 text-3xl md:text-4xl font-extrabold text-white leading-snug">
+        지금 신청하면<br>
+        <span class="number-highlight">무료로 먼저 체험</span>할 수 있어요
+      </h2>
+      <p class="mt-4 text-gray-400 text-base">
+        비싼 외주 없이, AI로 랜딩페이지를 만들어 볼 첫 번째 기회입니다.
+      </p>
+    </div>
+
+    <div class="form-card rounded-3xl p-8 shadow-2xl">
+      <form action="TBD" method="POST" onsubmit="submitToSheet(event)" class="space-y-5">
+        <!-- 이름 -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            이름 <span class="text-[var(--primary-color)]">*</span>
+          </label>
+          <input type="text" name="이름" placeholder="홍길동" required="" class="form-input w-full px-4 py-3 rounded-xl text-gray-800 text-sm bg-white">
+        </div>
+
+        <!-- 이메일 -->
+        <div class="">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            이메일 <span class="text-[var(--primary-color)]">*</span>
+          </label>
+          <input type="email" name="이메일" placeholder="abcd@email.com" required="" class="form-input w-full px-4 py-3 rounded-xl text-gray-800 text-sm bg-white">
+        </div>
+
+        <!-- 소개 -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            소개 <span class="text-[var(--primary-color)]">*</span>
+          </label>
+          <textarea name="소개" placeholder="만들고자 하는 랜딩페이지에 대해 소개해 주세요" required="" rows="4" class="form-input w-full px-4 py-3 rounded-xl text-gray-800 text-sm bg-white resize-none"></textarea>
+        </div>
+
+        <!-- 의견 -->
+        <div class="">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            의견 <span class="text-[var(--primary-color)]">*</span>
+          </label>
+          <input type="number" name="의견" placeholder="이 서비스의 예상 비용을 작성해 주세요." required="" class="form-input w-full px-4 py-3 rounded-xl text-gray-800 text-sm bg-white">
+        </div>
+
+        <button type="submit" class="cta-button w-full text-white font-bold text-base py-4 rounded-2xl mt-2">
+          무료 테스터 신청하기 →
+        </button>
+
+        <div class="flex items-center justify-center gap-2 pt-1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <p class="text-gray-400 text-xs">개인정보는 안전하게 보호되며, 외부에 절대 공유되지 않습니다.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="text-center mt-8">
+      <p class="text-gray-500 text-sm">
+        문의사항이 있으신가요?
+        <a href="mailto:cnksncks0411@naver.com" class="text-[var(--secondary-color)] font-semibold hover:underline ml-1">
+          cnksncks0411@naver.com
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-[#0f0500] py-10 px-6 text-center">
+  <img src="./b46e1f7a-a1ec-42fb-b795-c750d167ba69/1773578555918-a04typ1.png" alt="Landy" class="h-8 w-auto mx-auto mb-4 opacity-70">
+  <p class="text-gray-600 text-xs">
+    © 2025 Landy. All rights reserved.
+  </p>
+  <p class="text-gray-700 text-xs mt-1">
+    <a href="mailto:cnksncks0411@naver.com" class="hover:text-[var(--secondary-color)] transition-colors">cnksncks0411@naver.com</a>
+  </p>
+</footer>
+
+<!-- Preview Badge -->
+<div class="fixed bottom-4 right-4 z-50 bg-black bg-opacity-30 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur-sm border border-white border-opacity-10 pointer-events-none select-none hidden" style="display: none;">
+  Preview Mode
+</div>
+
+<script>
+function submitToSheet(event) {
+  event.preventDefault();
+  const form = event.target;
+  const url = form.action;
+  if (!url || url === 'TBD' || url.includes('/TBD')) {
+    alert('Oops! Form webhook URL is not set yet. Please click the form in the builder to input the URL.');
+    return;
+  }
+  const formData = new FormData(form);
+  fetch(url, { method: 'POST', body: formData })
+    .then((res) => {
+      if (!res.ok) throw new Error('Network Data Transfer Error');
+      alert('신청이 완료되었습니다. 감사합니다!');
+      form.reset();
+    })
+    .catch(() => alert('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'));
+}
+
+function openLightbox(src) {
+  const overlay = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const overlay = document.getElementById('lightbox');
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+function toggleFaq(item) {
+  const answer = item.querySelector('.faq-answer');
+  const icon = item.querySelector('.faq-icon');
+  const isOpen = answer.classList.contains('open');
+
+  document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = '');
+
+  if (!isOpen) {
+    answer.classList.add('open');
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+</script>
+
+
+
+
+
+</body></html>
